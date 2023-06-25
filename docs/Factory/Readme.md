@@ -2,6 +2,12 @@
 
 > Zjednodušuje vytváření složitých objektů.
 
+Továrna na základě vstupního diskriminátoru poskytne klientovi konkrétní objekt, nejčastěji konkrétní implementaci abstraktní třídy, nebo rozhraní.
+
+## Složení
+
+Pracujeme pouze s jedním objektem - továrnou, která metodu `Create(...)`, `Get(...)`, `CreateService(...)`, nebo podobnou metodu.
+
 ## Špatný přístup
 
 ```csharp
