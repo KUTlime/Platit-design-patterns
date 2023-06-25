@@ -85,7 +85,7 @@ Vaše konzolová aplikace musí sesbírat parametry z příkazové řádky, pře
 
 Otázka zní: **Jak zařídíte, že můžete napsat test, který ověří, že Vaše aplikace pracuje správně a sestavuje správně požadavek?**
 
-Nezajímá mne konkrétní implementace nějaké aplikace, jak se poradíte se situací, že musíte volat nějaké externí API v rámci testu.
+Nezajímá mne konkrétní implementace nějaké aplikace, ale jak si poradíte se situací, že musíte volat nějaké externí API v rámci testu.
 
 ## Úvod do návrhových vzorů
 
