@@ -1,6 +1,6 @@
-﻿# Selected design patterns
+﻿# Vybrané návrhové vzory
 
-> A documentation folder for selected design patterns.
+> Obecná dokumentace k vybraným návrhovým vzorům.
 
 * [Builder](./Builder/Readme.md)
 * [Façade](./Facade/Readme.md)
@@ -8,21 +8,19 @@
 * [State](./State/Readme.md)
 * [Strategy](./Strategy/Readme.md)
 
-## Sorted by category
+## Dle kategorie
 
-### Creational
+### Budovací
 
 * Builder
 * Factory
 
-### Structural
+### Strukturní
 
 * Façade
 
-### Behavioral
+### Chování
 
 * Observer
 * State
 * Strategy
-
-

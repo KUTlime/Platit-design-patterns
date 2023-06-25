@@ -1,5 +1,5 @@
-# Design patterns for Platit
+# Návrhové vzory pro Platit
 
-> Notes for ad hoc design pattern lecture for Platit
+> Poznámky pro školení návrhové vzory na míru.
 
-## Lecture 1 (2023-06-25)
+## Lekce 1 (2023-06-25)
