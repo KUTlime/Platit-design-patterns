@@ -12,6 +12,7 @@
 
 * Organizační záležitosti
 * Mapování vstupních znalostí
+* Co je potřeba opravdu znát při uvažování o implementaci návrhových vzorů
 * Úvod do návrhových vzorů
 * Factory
 * Builder
@@ -87,10 +88,24 @@ Otázka zní: **Jak zařídíte, že můžete napsat test, který ověří, že 
 
 Nezajímá mne konkrétní implementace nějaké aplikace, ale jak si poradíte se situací, že musíte volat nějaké externí API v rámci testu.
 
+## Co je opravdu potřeba znát při návrhu návrhových vzorů
+
+* Rozhraní
+* Abstraktní třída
+* Rozdíl mezi rozhraním a abstraktní třídou
+* Rozdíl mezi statickou a nestatickou třídou (_a metodou_)
+* Jak funguje a jak se tvoří metoda rozšíření
+* Jak funguje dědičnost (_a jaký je rozdíl mezi public, protected, private atd._)
+
 ## Úvod do návrhových vzorů
 
 * Gang of Four
 * Kniha [Design Patterns](https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612)
-* 3 kategorie návrhových vzorů - návrhové vzory vytváření, struktury a chování
-* Dnes známe mnoho dalších návrhových vzorů
-* Dnes máme dokonce i nové kategorie návrhových vzorů
+* 3 kategorie návrhových vzorů - návrhové vzory vytváření, struktury a chování.
+* Dnes známe mnoho dalších návrhových vzorů.
+* Dnes máme dokonce i nové kategorie návrhových vzorů.
+* Vznikají redesigny návrhových vzorů, např. populární Mediator v ASP.NET Core.
+* Důležité je říci, že návrhové vzory z dílny GoF bude .NET vývojář spíše konzumovat, než vytvářet
+  * `Task.Factory(...)` továrna na úkoly.
+  * `Task.Run(...)` fasáda pro továrnu na úkoly.
+  * atd.
