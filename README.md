@@ -70,10 +70,14 @@ Píšete konzolovou aplikaci, která bude používat třídu s názvem `ConfigPr
 Struktura třídy `ConfigProviderClient` je naznačena níže.
 
 ```csharp
-public record Request(Uri ConfigProviderUri, string ServiceName, string Token);
+public record ApiConfiguration(Uri ConfigProviderUri, string ServiceName, string Token);
+
+public record Request(string Key, string Value, bool Encrypted);
 
 public class ConfigProviderClient
 {
+    public ConfigProviderClient(ApiConfiguration configuration) => _configuration = configuration;
+
     public async Task<bool> AddConfigurationAsync(Request request)
     {
         // implementační detail
