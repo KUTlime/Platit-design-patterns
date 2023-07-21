@@ -6,7 +6,7 @@ Továrna na základě vstupního diskriminátoru poskytne klientovi konkrétní 
 
 ## Složení
 
-Pracujeme pouze s jedním objektem - továrnou, která má metodu `Create(...)`, `Get(...)`, `CreateService(...)`, nebo podobnou metodu.
+Pracujeme pouze s jedním objektem - továrnou, která metodu `Create(...)`, `Get(...)`, `CreateService(...)`, nebo podobnou metodu.
 
 ## Špatný přístup
 
@@ -44,7 +44,7 @@ interface IFactory<TOut>
 
 Trochu se nám tady bije `TOut?` s "Default" kontraktem. Klient musí kontrolovat `null`, ale jde to vyřešit i jinak.
 
-Typ `string` snese všechno, takže neprozrazuje žádné implementační detaily a **neporušuje červenou linii**.
+Typ `string` snese všechno, takže neprozrazuje žádné implementační detaily a **neporušuje implementační detaily**.
 
 ```csharp
 interface IFactory<TOut>
@@ -74,7 +74,7 @@ class SomeFactory : IFactory<Foo>
 
 Nabízí se otázka: "Co je lepší? Vracet `null`, nebo vyhazovat výjimku? Nebo jinak?"
 
-1. Pokud rozumíte jak se pracuje s nullable odkazovými typy, vracet `null` asi dává smysl (_nejlepší podpora v současném C#_).
+1. Pokud rozumíte jak se pracuje s nullable odkazovými typy, vracet `null` asi dává smysl. (nejlepší podpora v současném C#).
 2. Pokud umíme pracovat s discriminated unions, asi je lepší vracet něco jako OneOf<SomeService, Nothing>.
 3. Pokud víme, že je vhodnější aplikaci sestřelil, výjimka je na místě.
 4. Další možnost je `Null pattern`.

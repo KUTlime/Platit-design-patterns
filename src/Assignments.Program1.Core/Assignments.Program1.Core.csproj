@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="OneOf" Version="3.0.255" />
+    <PackageReference Include="OneOf.SourceGenerator" Version="3.0.255" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Assignments.Program1.ExternalNuget\Assignments.Program1.ExternalNuget.csproj" />
+  </ItemGroup>
+
+</Project>
