@@ -165,3 +165,33 @@ var page = new MainHtmlPageBuilder().BuildPage();
 ### Továrna + stavitel
 
 Místo složitého vytváření objektů v továrně, můžeme vyrobit pouze správného stavitele a předat ho řediteli, tj. objektu, který továrnu volal.
+
+```csharp
+interface IPage
+{}
+
+interface IPageBuilder
+{
+    IPageBuilder AddHeader();
+    IPageBuilder AddTitle();
+    IPageBuilder AddBody();
+    IPageBuilder AddFooter();
+    IPage GetPage();
+    IPage BuildPage() => AddHeader().AddTitle().AddBody().AddFooter().GetPage();
+}
+
+interface IPageBuilderFactory
+{
+    IPageBuilder Create(string discriminator);
+}
+
+public static class HtmlPageBuilderFactory : IPageBuilder
+{
+    // Implementace interface
+}
+
+// Main
+string builderDiscriminator = "html";
+var page = new HtmlPageBuilderFactory().Create(builderDiscriminator).BuildPage();
+
+```
