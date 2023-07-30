@@ -56,7 +56,7 @@ public class Director
         _builder.AddFooter();
     }
 
-    IPage GetHTMLPage() => _builder.GetPage();
+    IPage GetPage() => _builder.GetPage();
 }
 ```
 
