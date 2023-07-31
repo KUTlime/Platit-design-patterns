@@ -249,6 +249,3 @@ V OOP jazycích s automatickou správou paměti může nastat podobná situace, 
 V angličtině se tomuto problému říká [Lapsed listener problem](https://en.wikipedia.org/wiki/Lapsed_listener_problem).
 
 Situaci se bráníme tak, že musíme implementovat i `-=` chování, ne jenom `+=`.
-
-
-
