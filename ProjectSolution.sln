@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignments.Program1.Core",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assignments.Program1.Core.Unit.Tests", "tests\Assignments.Program1.Core.Unit.Tests\Assignments.Program1.Core.Unit.Tests.csproj", "{CE3B89B7-1F12-42B7-8D7F-55573E954D83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Demo", "DependencyInjection.Demo\DependencyInjection.Demo.csproj", "{63F9F8F3-872D-4A62-98B6-D332A85482D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DependencyInjection.Demo", "src\DependencyInjection.Demo\DependencyInjection.Demo.csproj", "{63F9F8F3-872D-4A62-98B6-D332A85482D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
