@@ -18,6 +18,8 @@ Modifikátory přístup u tříd a method mohou sloužit jako implementační pr
 
 ![Access Modifiers](image.png)
 
+Na úrovni knihovny je možné ještě zapnout viditelnost `internal` pro nějakou konkrétní knihovnu. Toto se dost často používá pro testy.
+
 ## Implementace na úrovni architektury
 
 Potřeba testů nás většinou donutí jít cestou abstrakce (_než cestou jedné implementace_).

@@ -38,17 +38,17 @@ interface IPageBuilder
     void AddHeader();
     void AddTitle();
     void AddBody();
-    void AddFooter()
+    void AddFooter();
     IPage GetPage();
 }
 
 public class Director
 {
-    public readonly IPageBuilder _builder;
+    private readonly IPageBuilder _builder;
 
     public Director(IPageBuilder builder) => _builder = builder;
 
-    public Build()
+    public void Build()
     {
         _builder.AddHeader();
         _builder.AddTitle();
@@ -56,7 +56,7 @@ public class Director
         _builder.AddFooter();
     }
 
-    IPage GetPage() => _builder.GetPage();
+    public IPage GetPage() => _builder.GetPage();
 }
 ```
 
@@ -71,7 +71,7 @@ interface IPageBuilder
     IPageBuilder AddHeader();
     IPageBuilder AddTitle();
     IPageBuilder AddBody();
-    IPageBuilder AddFooter()
+    IPageBuilder AddFooter();
     IPage GetPage();
 }
 
@@ -81,7 +81,7 @@ public class Director
 
     public Director(IPageBuilder builder) => _builder = builder;
 
-    public Build() => _builder.AddHeader().AddTitle().AddBody().AddFooter();
+    public void Build() => _builder.AddHeader().AddTitle().AddBody().AddFooter();
 
     IPage GetHTMLPage() => _builder.GetPage();
 }
@@ -104,13 +104,16 @@ interface IPageBuilder
 
 public static class Director
 {
-    public IPageBuilder Build(IPageBuilder builder) => builder.AddHeader().AddTitle().AddBody().AddFooter();
+    public static IPageBuilder Build(IPageBuilder builder) 
+        => builder.AddHeader().AddTitle().AddBody().AddFooter();
 }
 
 // Main
 var builder = Director.Build(new MainHtmlPageBuilder());
 var page = builder.GetPage();
 ```
+
+Statický přístup je vhodný použít tehdy, kdy mám v rámci aplikace jedno konkrétní volání, nebo bude vždy stejné, nepotřebuji mockovat, nebo z nějakého jiného důvodu se vždy obejdu se statickou implementací.
 
 ## Zjednodušená varianta bez ředitele alá >=`C# 8`
 
@@ -133,7 +136,7 @@ interface IPageBuilder
 var page = new MainHtmlPageBuilder().Build();
 ```
 
-Toto ovšem není moc šťastná varianta, protože někdo může zavolat `GetPage(...)` napřímo. Proto volíme spíše jiný postup, viz níže.
+Toto ovšem není moc šťastná varianta, protože někdo může zavolat `GetPage(...)` napřímo (_popř. zavolat nějakou jinou metodu z rozhraní i když to tak být nemá_). Proto volíme spíše jiný postup, viz níže.
 
 ## Varianta bez ředitele s pomocí abstraktní třídy
 
@@ -148,7 +151,7 @@ public abstract class PageBuilder
     protected abstract IPageBuilder AddBody();
     protected abstract IPageBuilder AddFooter();
     protected abstract IPage GetPage();
-    IPage BuildPage() => AddHeader().AddTitle().AddBody().AddFooter().GetPage();
+    public IPage BuildPage() => AddHeader().AddTitle().AddBody().AddFooter().GetPage();
 }
 
 public class MainHtmlPageBuilder : PageBuilder
@@ -158,6 +161,37 @@ public class MainHtmlPageBuilder : PageBuilder
 
 // Main
 var page = new MainHtmlPageBuilder().BuildPage();
+```
+
+Pokud by metody, které volám měly nějaké parametry, tak je musím předat nejpozději při volání `BuilPage(...)`.
+
+Lze řešit formou specifických argumentů.
+
+```csharp
+interface IPage
+{}
+
+public record PageBuilderArgs(string Header, string Title, string Body, string Footer);
+
+public abstract class PageBuilder
+{
+    protected abstract IPageBuilder AddHeader();
+    protected abstract IPageBuilder AddTitle();
+    protected abstract IPageBuilder AddBody();
+    protected abstract IPageBuilder AddFooter();
+    protected abstract IPage GetPage();
+    public virtual IPage BuildPage(PageBuilderArgs args) 
+        => AddHeader(args.Header).AddTitle(args.Title).AddBody(args.Body).AddFooter(args.Footer).GetPage();
+}
+
+public class MainHtmlPageBuilder : PageBuilder
+{
+    // Implementace abstraktních metod
+}
+
+// Main
+var page = new MainHtmlPageBuilder()
+    .BuildPage(new PageBuilderArgs("1/1", "Welcome", string.Empty, string.Empty));
 ```
 
 ## Návaznost na další návrhové vzory
@@ -185,7 +219,7 @@ interface IPageBuilderFactory
     IPageBuilder Create(string discriminator);
 }
 
-public static class HtmlPageBuilderFactory : IPageBuilder
+public class HtmlPageBuilderFactory : IPageBuilderFactory
 {
     // Implementace interface
 }
@@ -193,5 +227,36 @@ public static class HtmlPageBuilderFactory : IPageBuilder
 // Main
 string builderDiscriminator = "html";
 var page = new HtmlPageBuilderFactory().Create(builderDiscriminator).BuildPage();
+
+```
+
+popř. pro C# 11 a vyšší
+
+```csharp
+interface IPage
+{}
+
+interface IPageBuilder
+{
+    IPageBuilder AddHeader();
+    IPageBuilder AddTitle();
+    IPageBuilder AddBody();
+    IPageBuilder AddFooter();
+    IPage GetPage();
+    IPage BuildPage() => AddHeader().AddTitle().AddBody().AddFooter().GetPage();
+}
+
+interface IPageBuilderFactory
+{
+    static abstract IPageBuilder Create(string discriminator);
+}
+
+public class PageBuilderFactory : IPageBuilderFactory
+{
+    // Implementace interface
+}
+
+// Main
+var page = PageBuilderFactory.Create("html").BuildPage();
 
 ```

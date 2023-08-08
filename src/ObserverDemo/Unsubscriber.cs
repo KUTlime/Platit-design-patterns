@@ -1,11 +1,11 @@
 ﻿namespace ObserverDemo;
 
-public class Fan : IDisposable
+public class Unsubscriber : IDisposable
 {
     private readonly IObserver<Tweet> _observer;
     private readonly HashSet<IObserver<Tweet>> _observers;
 
-    public Fan(
+    public Unsubscriber(
         IObserver<Tweet> observer,
         HashSet<IObserver<Tweet>> observers)
     {

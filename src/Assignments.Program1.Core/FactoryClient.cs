@@ -6,7 +6,9 @@ internal class FactoryClient : ICarFactory
 
     public ICar CreateOrDefault(string discriminator) => throw new NotImplementedException();
 
+#pragma warning disable IDE0051
     private void DoSomething()
+#pragma warning restore IDE0051
     {
         var factory = new FactoryWithDiscriminatedUnion();
         var result = factory.CreateOrDefault("asdfasdf");

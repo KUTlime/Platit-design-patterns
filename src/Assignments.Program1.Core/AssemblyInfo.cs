@@ -1,6 +1,1 @@
-﻿namespace Assignments.Program1.Core;
-
-public class AssemblyInfo
-{
-    
-}
+﻿[assembly: InternalsVisibleTo("Assignments.Program1.Core.Unit.Tests")]

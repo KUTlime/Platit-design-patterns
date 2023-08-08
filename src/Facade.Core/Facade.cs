@@ -1,5 +1,5 @@
 ﻿namespace Facade.Core;
 
-class Facade
+public class Facade
 {
 }

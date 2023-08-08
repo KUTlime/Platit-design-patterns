@@ -108,7 +108,7 @@ Aplikace s grafickým uživatelským rozhraním se bez tohoto mechanismu neobejd
 
 To v praxi moc nechceme, ale můžeme řešit jinak.
 
-## Implementace se slabou vazbou
+## Implementace s generickým předplatitelem a vydavatelem
 
 Závislosti můžeme snadno rozbít s pomocí generiky.
 
@@ -189,8 +189,8 @@ Závislosti můžeme snadno rozbít s pomocí generiky.
 
 ### Pozorovatel skrze rozhraní `IObservable<T>` a `IObserver<T>`
 
-[Microsoft Learn článek](https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern)
-[IObserver](https://learn.microsoft.com/en-us/dotnet/api/system.iobserver-1)
+[Microsoft Learn článek](https://learn.microsoft.com/en-us/dotnet/standard/events/observer-design-pattern)  
+[IObserver](https://learn.microsoft.com/en-us/dotnet/api/system.iobserver-1)  
 [IObservable](https://learn.microsoft.com/en-us/dotnet/api/system.iobservable-1)
 
 ## Implementace na úrovni jazyka

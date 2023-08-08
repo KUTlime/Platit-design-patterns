@@ -1,5 +1,8 @@
 ﻿namespace Facade.Core;
 
-class Demo
+internal class Demo
 {
+    private class DemoInClass
+    {
+    }
 }
