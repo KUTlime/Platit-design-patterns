@@ -26,6 +26,7 @@ Přidání stavu nesmí ovlivnit konzumenta.
 * Pohyb figurek po šachovnici (_typicky král_)
 * Možnost implementace stavového stroje (_stav 1 -> stav 2 -> stav 3), nebo (_stav 1 -> stav 2 -> stav 1_)
 * Ošetření chování na základě dostupnosti zdrojů (volný vs. konzervativní přístup)
+* Metody PEC(L)E v numerické matematice (Prediktor korektor metody)
 
 ### Příklad hry ze světa Star Treku
 
