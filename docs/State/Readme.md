@@ -25,12 +25,13 @@ Přidání stavu nesmí ovlivnit konzumenta.
 * Packman (_a obecně game development, kde se různé objekty, typicky "umělá" inteligence může chovat jinak podle situace - počet přátel v okolí, stav munice, stav zdraví atd._)
 * Pohyb figurek po šachovnici (_typicky král_)
 * Možnost implementace stavového stroje (_stav 1 -> stav 2 -> stav 3), nebo (_stav 1 -> stav 2 -> stav 1_)
+* Ošetření chování na základě dostupnosti zdrojů (volný vs. konzervativní přístup)
 
 ### Příklad hry ze světa Star Treku
 
 Představme si příklad, že modelujeme tahovou strategii ze světa Star Treku, kde se střetávají dvě kosmické lodě. Zde využijeme stav hned několik stavů.
 
-1. Volba manévrování na základě stavu štítů (natočení lodi směrem k minimalizaci poničení lodi).
+1. Volba automatické manévrování na základě stavu štítů (natočení lodi směrem k minimalizaci poničení lodi).
 2. Volba útoku na základě počtu cílů, jejich poškození, a zásob (_např. photonových torpéd_).
 3. Modelování damage lodi, na kterou je útočeno. Loď má např. rychlost = 0, pokud stav motorů = mimo provoz.
 
