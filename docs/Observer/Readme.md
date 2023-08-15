@@ -36,74 +36,74 @@ Aplikace s grafickým uživatelským rozhraním se bez tohoto mechanismu neobejd
 ### Vlastní vzorová implementace
 
 ```csharp
-    public class Payload
-    {
-        public string Message { get; set; }
+public class Payload
+{
+    public string Message { get; set; }
+}
+
+public class Subject : IObservable<Payload>
+{
+    public ICollection<IObserver<Payload>> Observers { get; set; }
+
+    public Subject() => Observers = new List<IObserver<Payload>>();
+
+    public IDisposable Subscribe(IObserver<Payload> observer)
+    {         
+        if (!Observers.Contains(observer))
+        {
+            Observers.Add(observer);
+        }
+
+        return new Unsubscriber(observer, Observers);
     }
 
-    public class Subject : IObservable<Payload>
+    public void SendMessage(string message)
     {
-        public ICollection<IObserver<Payload>> Observers { get; set; }
-
-        public Subject() => Observers = new List<IObserver<Payload>>();
-
-        public IDisposable Subscribe(IObserver<Payload> observer)
-        {         
-            if (!Observers.Contains(observer))
-            {
-                Observers.Add(observer);
-            }
-
-            return new Unsubscriber(observer, Observers);
-        }
-
-        public void SendMessage(string message)
+        foreach (var observer in Observers)
         {
-            foreach (var observer in Observers)
-            {
-                observer.OnNext(new Payload { Message = message });
-            }
+            observer.OnNext(new Payload { Message = message });
         }
     }
+}
 
-    public class Unsubscriber : IDisposable
+public class Unsubscriber : IDisposable
+{
+    private IObserver<Payload> _observer;
+    private IList<IObserver<Payload>> _observers;
+
+    public Unsubscriber(
+        IObserver<Payload> observer,
+        IList<IObserver<Payload>> observers)
     {
-        private IObserver<Payload> _observer;
-        private IList<IObserver<Payload>> _observers;
-
-        public Unsubscriber(
-            IObserver<Payload> observer,
-            IList<IObserver<Payload>> observers)
-        {
-            _observer = observer;
-            _observers = observers;
-        }
-
-        public void Dispose()
-        {
-            if (observer != null && observers.Contains(observer))
-            {
-                observers.Remove(observer);
-            }
-        }
+        _observer = observer;
+        _observers = observers;
     }
 
-    public class Observer : IObserver<Payload>
+    public void Dispose()
     {
-        public string Message { get; set; }
-
-        public void OnCompleted()
+        if (observer != null && observers.Contains(observer))
         {
+            observers.Remove(observer);
         }
-
-        public void OnError(Exception error)
-        {
-        }
-
-        public void OnNext(Payload value) => Message = value.Message;
-
-        public IDisposable Register(Subject subject) => subject.Subscribe(this);
     }
+}
+
+public class Observer : IObserver<Payload>
+{
+    public string Message { get; set; }
+
+    public void OnCompleted()
+    {
+    }
+
+    public void OnError(Exception error)
+    {
+    }
+
+    public void OnNext(Payload value) => Message = value.Message;
+
+    public IDisposable Register(Subject subject) => subject.Subscribe(this);
+}
 ```
 
 To v praxi moc nechceme, ale můžeme řešit jinak.
@@ -115,74 +115,74 @@ Závislosti můžeme snadno rozbít s pomocí generiky.
 ### Generická implementace
 
 ```csharp
-    public class Payload
-    {
-        public string Message { get; set; }
+public class Payload
+{
+    public string Message { get; set; }
+}
+
+public class Subject<T> : IObservable<T>
+{
+    public ICollection<IObserver<T>> Observers { get; set; }
+
+    public Subject() => Observers = new List<IObserver<T>>();
+
+    public IDisposable Subscribe(IObserver<T> observer)
+    {         
+        if (!Observers.Contains(observer))
+        {
+            Observers.Add(observer);
+        }
+
+        return new Unsubscriber(observer, Observers);
     }
 
-    public class Subject<T> : IObservable<T>
+    public void SendMessage(string message)
     {
-        public ICollection<IObserver<T>> Observers { get; set; }
-
-        public Subject() => Observers = new List<IObserver<T>>();
-
-        public IDisposable Subscribe(IObserver<T> observer)
-        {         
-            if (!Observers.Contains(observer))
-            {
-                Observers.Add(observer);
-            }
-
-            return new Unsubscriber(observer, Observers);
-        }
-
-        public void SendMessage(string message)
+        foreach (var observer in Observers)
         {
-            foreach (var observer in Observers)
-            {
-                observer.OnNext(new Payload { Message = message });
-            }
+            observer.OnNext(new Payload { Message = message });
         }
     }
+}
 
-    public class Unsubscriber<T> : IDisposable
+public class Unsubscriber<T> : IDisposable
+{
+    private IObserver<T> _observer;
+    private IList<IObserver<T>> _observers;
+
+    public Unsubscriber(
+        IObserver<T> observer,
+        IList<IObserver<T>> observers)
     {
-        private IObserver<T> _observer;
-        private IList<IObserver<T>> _observers;
-
-        public Unsubscriber(
-            IObserver<T> observer,
-            IList<IObserver<T>> observers)
-        {
-            _observer = observer;
-            _observers = observers;
-        }
-
-        public void Dispose()
-        {
-            if (observer != null && observers.Contains(observer))
-            {
-                observers.Remove(observer);
-            }
-        }
+        _observer = observer;
+        _observers = observers;
     }
 
-    public class Observer<T> : IObserver<T>
+    public void Dispose()
     {
-        public string Message { get; set; }
-
-        public void OnCompleted()
+        if (observer != null && observers.Contains(observer))
         {
+            observers.Remove(observer);
         }
-
-        public void OnError(Exception error)
-        {
-        }
-
-        public void OnNext(T value) => Message = value.Message;
-
-        public IDisposable Register(Subject subject) => subject.Subscribe(this);
     }
+}
+
+public class Observer<T> : IObserver<T>
+{
+    public string Message { get; set; }
+
+    public void OnCompleted()
+    {
+    }
+
+    public void OnError(Exception error)
+    {
+    }
+
+    public void OnNext(T value) => Message = value.Message;
+
+    public IDisposable Register(Subject subject) => subject.Subscribe(this);
+}
 ```
 
 ## Implementace na úrovni .NET
@@ -233,7 +233,6 @@ class Subscriber
         Console.WriteLine($"Received message: {message}");
     }
 }
-
 ```
 
 ## Problém tmavé posluchárny
