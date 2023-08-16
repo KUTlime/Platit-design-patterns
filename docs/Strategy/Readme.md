@@ -4,7 +4,7 @@
 
 Vynucení chování třídy na základě **vnějšího** stavu, příkazu. Chování určuje klient (_je vnuceno z venku_).
 
-vzor Strategie zapouzdřuje určité chování tak, aby si klient mohl vybrat jakoukoliv variantu a neovlivnilo to výsledek. Cílem je tak vytvořit závislost chování třídy na jejím vnějším stavu, zjednodušit vnitřní implementaci (_odstranit `if`y_) a celkově zpřehlednit kód implementací jednotlivých stavových chování do samostatných tříd.
+Vzor Strategie zapouzdřuje určité chování tak, aby si klient mohl vybrat jakoukoliv variantu a neovlivnilo to výsledek. Cílem je tak vytvořit závislost chování třídy na jejím vnějším stavu, zjednodušit vnitřní implementaci (_odstranit `if`y_) a celkově zpřehlednit kód implementací jednotlivých stavových chování do samostatných tříd.
 
 Tento vzor je podobný se stavem, kde však změna přichází zevnitř, nepřímo.
 
@@ -31,7 +31,7 @@ Změna strategie nesmí ovlivnit konzumenta.
 
 ### Příklad hry ze světa Star Treku
 
-Představme si příklad, že modelujeme tahovou strategii ze světa Star Treku, kde se střetávají dvě kosmické lodě. Zde využijeme stav hned několik stavů.
+Představme si příklad, že modelujeme tahovou strategii ze světa Star Treku, kde se střetávají dvě kosmické lodě. Zde využijeme strategii hned několik stavů.
 
 1. Taktické manévrovací styly, ze kterých si hráč vybere (_počty přemístění a změny směrů_).
 2. Volba typu zbraní na taktické konzole (fasery, disruptory, fotonová torpéda), útok však může loď zamítnout na základě vnitřního stavu zbraňových systémů a zásob energie a střeliva.

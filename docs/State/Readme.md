@@ -30,7 +30,7 @@ Přidání stavu nesmí ovlivnit konzumenta.
 
 ### Příklad hry ze světa Star Treku
 
-Představme si příklad, že modelujeme tahovou strategii ze světa Star Treku, kde se střetávají dvě kosmické lodě. Zde využijeme stav hned několik stavů.
+Představme si příklad, že modelujeme tahovou strategii ze světa Star Treku, kde se střetávají dvě kosmické lodě. Zde využijeme stav hned několikrát.
 
 1. Volba automatické manévrování na základě stavu štítů (natočení lodi směrem k minimalizaci poničení lodi).
 2. Volba útoku na základě počtu cílů, jejich poškození, a zásob (_např. photonových torpéd_).
