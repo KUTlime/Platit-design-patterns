@@ -179,10 +179,10 @@ public record PageBuilderArgs(string Header, string Title, string Body, string F
 
 public abstract class PageBuilder
 {
-    protected abstract IPageBuilder AddHeader();
-    protected abstract IPageBuilder AddTitle();
-    protected abstract IPageBuilder AddBody();
-    protected abstract IPageBuilder AddFooter();
+    protected abstract IPageBuilder AddHeader(string header);
+    protected abstract IPageBuilder AddTitle(string title);
+    protected abstract IPageBuilder AddBody(string body);
+    protected abstract IPageBuilder AddFooter(string footer);
     protected abstract IPage GetPage();
     public virtual IPage BuildPage(PageBuilderArgs args) 
         => AddHeader(args.Header).AddTitle(args.Title).AddBody(args.Body).AddFooter(args.Footer).GetPage();
