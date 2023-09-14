@@ -131,9 +131,13 @@ interface IPageBuilder
     IPage BuildPage() => AddHeader().AddTitle().AddBody().AddFooter().GetPage();
 }
 
+class MainHtmlPageBuilder : IPageBuilder
+{
+// ... Implementace
+}
 
 // Main
-var page = new MainHtmlPageBuilder().Build();
+var page = new MainHtmlPageBuilder().BuildPage();
 ```
 
 Toto ovšem není moc šťastná varianta, protože někdo může zavolat `GetPage(...)` napřímo (_popř. zavolat nějakou jinou metodu z rozhraní i když to tak být nemá_). Proto volíme spíše jiný postup, viz níže.
